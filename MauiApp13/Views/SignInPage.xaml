@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MauiApp13.Views.SignInPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:MauiApp13.ViewModels"
+    Title="SignIn"
+    x:DataType="viewmodels:SignInViewModel"
+    FlowDirection="RightToLeft">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Offset="0.0" Color="LightCyan" />
+            <GradientStop Offset="0.5" Color="#3a7bd5" />
+            <GradientStop Offset="1.0" Color="Purple" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <VerticalStackLayout
+        Padding="30"
+        Spacing="25"
+        VerticalOptions="Center">
+
+        <!--  שדה אימייל  -->
+        <Border
+            Padding="10"
+            Stroke="#ccc"
+            StrokeShape="RoundRectangle 8"
+            StrokeThickness="1">
+            <Entry
+                FontSize="18"
+                Keyboard="Email"
+                Placeholder="Email"
+                ReturnType="Go"
+                Text="{Binding UserName}"
+                TextColor="Wheat" />
+        </Border>
+
+        <!--  שדה סיסמה  -->
+        <Border
+            Padding="10"
+            Stroke="#ccc"
+            StrokeShape="RoundRectangle 8"
+            StrokeThickness="1">
+            <Grid
+                Padding="10"
+                ColumnDefinitions="*,Auto"
+                VerticalOptions="Center">
+                <Entry
+                    BackgroundColor="Transparent"
+                    FontSize="18"
+                    IsPassword="{Binding EntryAsPassword}"
+                    Placeholder="סיסמה"
+                    Text="{Binding UserPassword}"
+                    TextColor="Wheat"
+                    VerticalOptions="Center" />
+
+                <Button
+                    Margin="5,0,0,0"
+                    Padding="0"
+                    BackgroundColor="Transparent"
+                    Command="{Binding ShowPasswordCommand}"
+                    FontFamily="MaterialIcons"
+                    FontSize="24"
+                    HorizontalOptions="End"
+                    Text="{Binding PasswordIconCode}"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+            </Grid>
+        </Border>
+
+        <!--  כפתור התחברות  -->
+        <Button
+            Command="{Binding SignInCommand}"
+            CornerRadius="8"
+            FontSize="18"
+            HeightRequest="50"
+            Text="חיבור"
+            TextColor="White" />
+
+        <!--  הודעת סטטוס / שגיאה  -->
+        <Label
+            FontSize="45"
+            HorizontalTextAlignment="Center"
+            IsVisible="{Binding SignInMessageVisible}"
+            Text="{Binding LoginMessage}"
+            TextColor="{Binding SignInMessageColor}" />
+
+    </VerticalStackLayout>
+</ContentPage>
